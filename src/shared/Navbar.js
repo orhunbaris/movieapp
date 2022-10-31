@@ -7,7 +7,7 @@ export default function Navbar()
             <Link to="/" className="site-title">Site Name</Link>
             <ul>
                 <CustomLink to="/popular"> Popular </CustomLink>
-                <CustomLink to="/welcome"> Welcome </CustomLink>
+                <CustomLink to="/login"> Log in </CustomLink>
             </ul>
         </nav>
     )
