@@ -1,12 +1,10 @@
-import { useState,useEffect } from "react"
-import { Link, useMatch, useResolvedPath } from "react-router-dom"
+import { useState, useEffect, useReducer } from "react"
+import { Link, useMatch, useResolvedPath, useNavigate } from "react-router-dom"
 import MovieList from "../movielist/MovieList"
+import axios from "axios"
 
 
-const adminUser = {
-    name: "admin",
-    password: "123"
-}
+
 
 function LoginForm({ }){
 
@@ -14,10 +12,24 @@ function LoginForm({ }){
     const [logged, setLogged] = useState(false)
     // State to store users
     const [user, setUser] = useState({name:"", password: ""})
+    // State to store already registered users
+    const [registeredusers, setRegisteredUsers] = useState([]) 
+    // navigation
+    const navigate = useNavigate()
     
     
+    // fetching the registered users from db.json
     useEffect(()=>{
-        console.log("getting already registered use")
+        axios.get("http://localhost:3000/data").then((res)=>{
+    
+          setRegisteredUsers(res.data)
+          //console.log(registeredusers)
+    
+        }).catch((err) => {
+    
+          console.log('error')
+    
+        })
     },[])
 
 
@@ -27,29 +39,50 @@ function LoginForm({ }){
     const handleSubmit = (e) => {
         e.preventDefault()
         
-        if(user.name == adminUser.name && user.password == user.password)
+        if(isRegisteredChecker())
         {
-            setLogged(!logged)
-            console.log("this user exists...")
+           navigate("/popular")
             
-        
 
         }
+        else{
+
+            // TODO: not registered alarm here
+            console.log("cannot log in please register first")
+        }
         
-        <MovieList user={user} logged={logged}/>
+        
             
     }
 
-    
-        
-        
-        
-    
 
+    function isRegisteredChecker(){
+
+        console.log("now checking")
+        for(let i=0; i<registeredusers.length; i++){
+
+            console.log(registeredusers[i].name)
+            // checks if the submitted credentials matches with any of the already registered users
+            if(user.name === registeredusers[i].name && user.password === registeredusers[i].password )
+            {
+                console.log("this user is registered in the database")
+                return true;
+            }
+            else {
+                console.log("this user is NOT registered in the database")
+                return false;
+            }
+
+        }
+    }
+    
+    /*TODO: ADD A REGISTER BUTTON WHICH EXECUTES A POST TO db.json */
+    
 
     return(
         <div>
             <h1>Welcome!</h1>
+            
             <form className="login-form" onSubmit={handleSubmit}>
                 <div className="inner-form-element">
                     <label className="label-name">Name</label>
@@ -59,12 +92,9 @@ function LoginForm({ }){
                     <label className="label-password">Password</label>
                     <input type="password" id="password" placeholder="Password" onChange={(e) => setUser({...user, password: e.target.value })}></input>
                 </div>
-                <Link to="/popular">
                     <button type="submit" className="submit-button">Login</button>
-                </Link>    
-
-
             </form>
+            
         </div>
     )
 

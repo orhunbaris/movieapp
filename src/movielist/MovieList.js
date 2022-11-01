@@ -29,8 +29,8 @@ function MovieList ({logged}){
         
       },[])
 
-    if(logged)
-    {
+
+    
         return(
             <div>
                 <h2>Popular movies</h2>
@@ -38,10 +38,7 @@ function MovieList ({logged}){
                     movies.map((movie, index) => {
                         return (
                             <div className="movies-list"key={index}>
-                                {/* <li key={index} onClick={(e)=>setToWatch(movie.title)}>
-                                    {movie.title}
-                                    <img src={"https://image.tmdb.org/t/p/w500" + movie.poster_path} alt="movie_card_image"/>
-                                </li> */}
+                                
                                 <MovieCard movie={movie} />
                             </div>
                         )
@@ -49,9 +46,8 @@ function MovieList ({logged}){
                 }
             </div>
         )
-    }
-    else
-        return
+
+   
 
 }
 
