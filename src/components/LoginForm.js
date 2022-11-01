@@ -59,8 +59,9 @@ function LoginForm({ }){
             else if(formaction ==="register"){
                 // POST REQUEST 
                 console.log("this user is trying to register")
-                
-                axios.post('https://localhost:3000/data/', {
+                const user_to_add_id = Math.floor(Math.random() * (1000 - 5) + 5)
+                axios.post('http://localhost:3000/data/', {
+                    id: user_to_add_id,
                     name: user.name,
                     password: user.password
                 } )
