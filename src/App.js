@@ -29,6 +29,7 @@ function App() {
 
 
   return (  
+    
     <UserContext.Provider value={{currentUser, setCurrentUser}}>      
         <Navbar />
         <Routes>

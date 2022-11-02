@@ -20,7 +20,7 @@ function LoginForm(){
     // navigation
     const navigate = useNavigate()
     // Current User Context
-    const {currentuser, setCurrentUser} = useContext(UserContext)
+    const {currentUser, setCurrentUser} = useContext(UserContext)
 
 
     
@@ -48,8 +48,7 @@ function LoginForm(){
                     {   
                         // If login process is successful update UserContext -> current_user and update isLogged which is passed by UserContext from parent component
                         setCurrentUser({current_username: user.name, isLogged: true})
-                        console.log(user.name)
-                        console.log(currentuser)
+                        
                         navigate("/popular")
                         
 
@@ -131,6 +130,7 @@ function LoginForm(){
                 </div>
                     <button type="submit" className="submit-button" value="login" onClick={() => setFormAction("login") } >Login</button>
                     <button type="submit" className="submit-button" value="register" onClick={()=> setFormAction("register")}>Register</button>
+                    
             </form>
             
         </div>

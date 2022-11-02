@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext} from "react"
 import MovieCard from "./MovieCard.js"
 import axios from "axios"
-
+import { UserContext } from "../components/UserContext.js"
 const apiKey = process.env.REACT_APP_API_KEY 
 
 
@@ -9,6 +9,8 @@ const apiKey = process.env.REACT_APP_API_KEY
 function MovieList ({logged}){
 
     const [movies, setMovies] = useState([])
+
+    const {currentUser} = useContext(UserContext)
 
     
   
@@ -37,8 +39,8 @@ function MovieList ({logged}){
                 {
                     movies.map((movie, index) => {
                         return (
+                            
                             <div className="movies-list"key={index}>
-                                
                                 <MovieCard movie={movie} />
                             </div>
                         )
