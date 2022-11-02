@@ -3,32 +3,32 @@
     {
       "id": "1",
       "name": "orhun",
-      "password": "123"
+      "password": "123",
+      "favoritelist": []
     },
     {
       "id": "2",
       "name": "henry",
-      "password": "123"
+      "password": "123",
+      "favoritelist": []
     },
     {
       "id": "3",
       "name": "efe",
-      "password": "123"
+      "password": "123",
+      "favoritelist": []
     },
     {
       "id": "4",
       "name": "qwerty",
-      "password": "qwerty"
+      "password": "qwerty",
+      "favoritelist": []
     },
     {
       "id": "5",
       "name": "admin",
-      "password": "123"
-    },
-    {
-      "id": 6,
-      "name": "orhun123",
-      "password": "123"
+      "password": "123",
+      "favoritelist": []
     }
   ]
 }

@@ -6,7 +6,7 @@ const apiKey = process.env.REACT_APP_API_KEY
 
 
 
-function MovieList ({logged}){
+function MovieList ({}){
 
     const [movies, setMovies] = useState([])
 
@@ -32,23 +32,29 @@ function MovieList ({logged}){
       },[])
 
 
-    
-        return(
-            <div>
-                <h2>Popular movies</h2>
-                {
-                    movies.map((movie, index) => {
-                        return (
-                            
-                            <div className="movies-list"key={index}>
-                                <MovieCard movie={movie} />
-                            </div>
-                        )
-                    })
-                }
-            </div>
-        )
-
+        if(currentUser.isLogged === true)
+        {
+            return(
+                <div>
+                    <h2>Popular movies</h2>
+                    {
+                        movies.map((movie, index) => {
+                            return (
+                                
+                                <div className="movies-list"key={index}>
+                                    <MovieCard movie={movie} />
+                                </div>
+                                
+                            )
+                        })
+                    }
+                </div>
+            )
+        }
+        else{
+            
+            return <h1>Please log in before you continue</h1>
+        }
    
 
 }

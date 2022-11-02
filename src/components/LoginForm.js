@@ -42,12 +42,16 @@ function LoginForm(){
 
     const handleSubmit = (e) => {
         e.preventDefault()
+
+        const isRegistered = registeredusers.some(registeredusers => registeredusers.name === user.name && registeredusers.password === user.password)
+
+        const matchedUser = registeredusers.find(registeredusers => registeredusers.name === user.name && registeredusers.password === user.password)
         
             if(formaction === "login"){
-                    if(isRegisteredChecker())
+                    if(isRegistered)
                     {   
                         // If login process is successful update UserContext -> current_user and update isLogged which is passed by UserContext from parent component
-                        setCurrentUser({current_username: user.name, isLogged: true})
+                        setCurrentUser({current_username: user.name, isLogged: true, current_id: matchedUser.id, current_password: matchedUser.password, current_favlist: matchedUser.fav})
                         
                         navigate("/popular")
                         
@@ -55,26 +59,23 @@ function LoginForm(){
                     }
                     else{
 
-                        // TODO: not registered alarm here
-                        alert("cannot log in please register first")
+                        
+                        alert("cannot log in...")
                     }
                 }
             else if(formaction ==="register"){
                 // POST REQUEST 
                 console.log("this user is trying to register")
 
-
-                const len = registeredusers.length
-
-
-
-                const user_to_add_id = len + 1
+                // 
+                const user_to_add_id = Math.floor(Math.random() * (1000 - 5) + 5)
 
 
                 axios.post('http://localhost:3000/data/', {
                     id: user_to_add_id,
                     name: user.name,
-                    password: user.password
+                    password: user.password,
+                    favoritelist: []
                 } )
                 .then(res=> {console.log(res.data)})
                 .catch((err) => {
@@ -88,29 +89,29 @@ function LoginForm(){
     }
 
 
-    function isRegisteredChecker(){
+    // function isRegisteredChecker(){
 
-        console.log("now checking")
+    //     console.log("now checking")
 
        
 
-        for(let i=0; i<registeredusers.length; i++){
+    //     for(let i=0; i<registeredusers.length; i++){
             
-            console.log(registeredusers[i].name)
-            // checks if the submitted credentials matches with any of the already registered users
-            if(user.name === registeredusers[i].name && user.password === registeredusers[i].password )
-            {
+            
+    //         // checks if the submitted credentials matches with any of the already registered users
+    //         if(user.name === registeredusers[i].name && user.password === registeredusers[i].password )
+    //         {
                 
 
 
-                console.log("this user is registered in the database")
-                return true;
-            }
+    //             console.log("this user is registered in the database")
+    //             return true;
+    //         }
             
             
-        }
-        return false;
-    }
+    //     }
+    //     return false;
+    // }
 
     
     
