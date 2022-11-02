@@ -1,12 +1,13 @@
-import { useState, useEffect, useReducer } from "react"
+import { useState, useEffect, useReducer, useContext } from "react"
 import { Link, useMatch, useResolvedPath, useNavigate } from "react-router-dom"
-import MovieList from "../movielist/MovieList"
+import  {UserContext}  from "./UserContext.js"
+
 import axios from "axios"
 
 
 
 
-function LoginForm({ }){
+function LoginForm(){
 
     // Boolean state to check if the user is logged in or not
     const [logged, setLogged] = useState(false)
@@ -18,6 +19,8 @@ function LoginForm({ }){
     const [formaction, setFormAction] = useState("")
     // navigation
     const navigate = useNavigate()
+    // Current User Context
+    const {currentuser, setCurrentUser} = useContext(UserContext)
 
 
     
@@ -28,6 +31,7 @@ function LoginForm({ }){
     
           setRegisteredUsers(res.data)
           //console.log(registeredusers)
+          
     
         }).catch((err) => {
     
@@ -36,17 +40,17 @@ function LoginForm({ }){
         })
     },[])
 
-
-
-
-
     const handleSubmit = (e) => {
         e.preventDefault()
         
-            if(formaction ==="login"){
+            if(formaction === "login"){
                     if(isRegisteredChecker())
-                    {
-                    navigate("/popular")
+                    {   
+                        // If login process is successful update UserContext -> current_user and update isLogged which is passed by UserContext from parent component
+                        setCurrentUser({current_username: user.name, isLogged: true})
+                        console.log(user.name)
+                        console.log(currentuser)
+                        navigate("/popular")
                         
 
                     }
@@ -59,7 +63,15 @@ function LoginForm({ }){
             else if(formaction ==="register"){
                 // POST REQUEST 
                 console.log("this user is trying to register")
-                const user_to_add_id = Math.floor(Math.random() * (1000 - 5) + 5)
+
+
+                const len = registeredusers.length
+
+
+
+                const user_to_add_id = len + 1
+
+
                 axios.post('http://localhost:3000/data/', {
                     id: user_to_add_id,
                     name: user.name,
@@ -80,22 +92,25 @@ function LoginForm({ }){
     function isRegisteredChecker(){
 
         console.log("now checking")
-        for(let i=0; i<registeredusers.length; i++){
 
+       
+
+        for(let i=0; i<registeredusers.length; i++){
+            
             console.log(registeredusers[i].name)
             // checks if the submitted credentials matches with any of the already registered users
             if(user.name === registeredusers[i].name && user.password === registeredusers[i].password )
             {
-                console.log("this user is registered in the database")
                 
+
+
+                console.log("this user is registered in the database")
                 return true;
             }
-            else {
-                console.log("this user is NOT registered in the database")
-                return false;
-            }
-
+            
+            
         }
+        return false;
     }
 
     

@@ -7,26 +7,36 @@ import Navbar from "./shared/Navbar.js";
 import LoginForm from "./components/LoginForm.js";
 import Home from "./shared/Home.js";
 
+import { UserContext } from "./components/UserContext.js";
 
 
 
- const apiKey = process.env.REACT_APP_API_KEY 
+
+
 
  
 
 
 function App() {
 
+  const [currentUser, setCurrentUser] = useState(
+    {
+    current_username: "",
+    isLogged: false
+    }
+  )
+
+
 
   return (  
-    <>      
+    <UserContext.Provider value={{currentUser, setCurrentUser}}>      
         <Navbar />
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/popular" element={<MovieList/>} />
             <Route path="/login" element={<LoginForm />} />
         </Routes>
-    </>
+    </UserContext.Provider>
   )
 }
 
