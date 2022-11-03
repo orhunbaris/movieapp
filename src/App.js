@@ -21,10 +21,10 @@ function App() {
 
   const [currentUser, setCurrentUser] = useState(
     {
-    current_id: null,
-    current_username: "",
-    current_password: "",
-    current_fav_list: [],
+    currentId: null,
+    currentUsername: "",
+    currentPassword: "",
+    currentList: [],
     isLogged: false
     }
   )

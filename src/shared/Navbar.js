@@ -4,7 +4,7 @@ export default function Navbar()
 {
     return(
         <nav className="nav">
-            <Link to="/" className="site-title">Site Name</Link>
+            <Link to="/" className="site-title">Movie App</Link>
             <ul>
                 <CustomLink to="/popular"> Popular </CustomLink>
                 <CustomLink to="/login"> Log in </CustomLink>

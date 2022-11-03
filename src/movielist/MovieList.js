@@ -2,7 +2,16 @@ import { useEffect, useState, useContext} from "react"
 import MovieCard from "./MovieCard.js"
 import axios from "axios"
 import { UserContext } from "../components/UserContext.js"
-const apiKey = process.env.REACT_APP_API_KEY 
+import MovieCardUpdate from "./MovieCardUpdate.js"
+import { Grid, ImageList } from "@mui/material"
+import { height } from "@mui/system"
+import Container from "@mui/material/Container"
+
+
+
+
+const apiKey = process.env.REACT_APP_API_KEY
+
 
 
 
@@ -35,20 +44,18 @@ function MovieList ({}){
         if(currentUser.isLogged === true)
         {
             return(
-                <div>
-                    <h2>Popular movies</h2>
-                    {
-                        movies.map((movie, index) => {
-                            return (
+                <Container className="movie-list" sx={{}} >
+                    
+                        {
+                            movies.map((movie, index) => {
+                                return (
                                 
-                                <div className="movies-list"key={index}>
-                                    <MovieCard movie={movie} />
-                                </div>
-                                
-                            )
-                        })
-                    }
-                </div>
+                                        <MovieCard movie={movie} />
+                                    
+                                )
+                            })
+                        }
+                </Container>
             )
         }
         else{
