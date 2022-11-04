@@ -1,42 +1,49 @@
 
 import axios from "axios"
+import { useReducer } from "react"
 import { API_URL_DATA } from "../constants/Constants"
 
 
-function registeredUsersReducer(registeredUsers, action){
-    switch(action.type)
-     {
-      case "GET":
-          axios.get(API_URL_DATA).then((res)=>{
-      
-          return res.data
-            
-      
-          }).catch((err) => {
-      
-            console.log('error fetching')
+export default async function  registeredUsersReducer(registeredUsers, action){
+
+
     
-        })
-      case "POST":
-        //
-        const userToAddId = Math.floor(Math.random() * (1000 - 5) + 5)
+    switch(action.type){
 
-
-                axios.post(API_URL_DATA ,{
-                    id: userToAddId,
-                    name: action.payload.name,
-                    password: action.payload.password,
-                    favoritelist: []
-                } )
-                .then(res=> {console.log(res.data)})
+        case "GET":
+            {
+                const response = await axios.get(API_URL_DATA)
+                .then((res)=>
+                    {
+                            return res.data
+                    })
+                .catch((err) => 
+                    {
+                            console.log('error getting data')
+                    })
+                    console.log("response is" , response)
+                    return [...response]
+            }
+        case "POST":
+            {
+                axios.post(API_URL_DATA , action.payload)
+                .then(res=> 
+                    {
+                        return [...registeredUsers, res.data]
+                    })
                 .catch((err) => {
-                    console.log("error")
-                })
+                        console.log("error registering new user")
+            })
+            break
+            }
+        case "UPDATE":
+            {
+                break
+            }
+        case "DELETE":
+            {
+                break
+            }
+    }
 
-      case "UPDATE":
-        //
-     }
-
-  }
-
-export default registeredUsersReducer
+}

@@ -2,13 +2,13 @@ import { useState, useEffect, useReducer, useContext } from "react"
 import { Link, useMatch, useResolvedPath, useNavigate } from "react-router-dom"
 import  {UserContext}  from "./UserContext.js"
 import  { API_URL_DATA}  from "../constants/Constants.js"
-import registeredUsersReducer from "../reducers/registeredUsersReducer.js"
+
 
 import axios from "axios"
 
 
 
-const initialState = []
+
 
 function LoginForm(){
 
@@ -16,21 +16,18 @@ function LoginForm(){
     const [logged, setLogged] = useState(false)
     // State to store users
     const [user, setUser] = useState({name:"", password: ""})
-    // State to store already registered users
-    const [registeredUsers, dispatch] = useReducer(registeredUsers, initialState)
-    // State to store if the user is trying to log in or register
     const [formAction, setFormAction] = useState("")
     // navigation
     const navigate = useNavigate()
     // Current User Context
-    const {currentUser, setCurrentUser} = useContext(UserContext)
+    const {currentUser, setCurrentUser, registeredUsers, dispatch} = useContext(UserContext)
 
 
     
     
     // fetching the registered users from db.json
     useEffect(()=>{
-        dispatch({type: 'GET'})
+        //dispatch({type: 'GET'})
     },[])
 
 
@@ -39,7 +36,7 @@ function LoginForm(){
     const handleSubmit = (e) => {
         e.preventDefault()
 
-     
+        console.log(registeredUsers)
 
 
         const isRegistered = registeredUsers.some(registeredUsers => registeredUsers.name === user.name && registeredUsers.password === user.password)
@@ -72,17 +69,18 @@ function LoginForm(){
                     }
                 }
             else if(formAction ==="register"){
-                // POST REQUEST 
-                // console.log("this user is trying to register")
+                
+                const userToAddId = Math.floor(Math.random() * (1000 - 5) + 5)
 
-                // 
-            dispatch({
-                type: "POST",
-                payload: {
-                    name: user.name,
-                    password: user.password
-                }
-            })
+                dispatch({
+                    type: "POST",
+                    payload: {
+                        id: userToAddId,
+                        name: user.name,
+                        password: user.password,
+                        favlist: []
+                    }
+                })
                
             }
                     

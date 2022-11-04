@@ -15,8 +15,8 @@ import registeredUsersReducer  from "./reducers/registeredUsersReducer.js";
 
 
 
-const initialState = [] 
 
+const initialUsers = []
 
 
 function App() {
@@ -30,15 +30,21 @@ function App() {
   )
 
   
+  const [registeredUsers, dispatch] = useReducer(registeredUsersReducer, initialUsers)  
 
-  const [registeredUsers, dispatch] = useReducer(registeredUsersReducer, initialState)
-
+  useEffect(()=>{
+    dispatch({type: "GET"
+  })
+    
+  },[])
 
   return (  
     
-    <UserContext.Provider value={{currentUser, setCurrentUser}}>      
+    <UserContext.Provider value={{currentUser, setCurrentUser, registeredUsers, dispatch}}>      
         <Navbar />
         <Routes>
+          {registeredUsers.map((user)=><h1>{user.name}</h1>)
+          }
             <Route path="/" element={<Home />} />
           { currentUser.isLogged &&
             <Route path="/popular" element={<MovieList/>} />
