@@ -4,7 +4,7 @@ import { useReducer } from "react"
 import { API_URL_DATA } from "../constants/Constants"
 
 
-export default async function  registeredUsersReducer(registeredUsers, action){
+export default function  registeredUsersReducer(registeredUsers, action){
 
     switch(action.type){
 

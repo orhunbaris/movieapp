@@ -30,7 +30,7 @@ function LoginForm(){
     
     // fetching the registered users from db.json
     useEffect(()=>{
-        fetchUsers()
+        //fetchUsers()
     },[])
 
 

@@ -50,7 +50,7 @@ function MovieList ({}){
                             movies.map((movie, index) => {
                                 return (
                                 
-                                        <MovieCard movie={movie} />
+                                        <MovieCard  key={index} movie={movie} />
                                     
                                 )
                             })

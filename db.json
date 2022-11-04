@@ -41,6 +41,12 @@
       "name": "efe123",
       "password": "12345",
       "favoritelist": []
+    },
+    {
+      "id": 396,
+      "name": "asd123",
+      "password": "123",
+      "favlist": []
     }
   ]
 }

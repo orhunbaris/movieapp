@@ -60,8 +60,7 @@ const addNewUser = (newUser) => {
 }
 
   useEffect(()=>{
-    dispatch({type: "FetchAll"})
-    console.log("fetched all users")
+    fetchUsers()
     
   },[])
 
