@@ -19,6 +19,7 @@ import registeredUsersReducer  from "./reducers/registeredUsersReducer.js";
 const initialUsers = []
 
 
+
 function App() {
 
   const [currentUser, setCurrentUser] = useState(
@@ -32,19 +33,46 @@ function App() {
   
   const [registeredUsers, dispatch] = useReducer(registeredUsersReducer, initialUsers)  
 
-  useEffect(()=>{
-    dispatch({type: "GET"
+
+  const fetchUsers = () => {
+    axios.get(API_URL_DATA)
+      .then((res)=>{
+        dispatch({type: "FetchAll", payload: res.data})
+      })
+      .catch((err)=>{
+        console.log("error fetching user data")
+      })
+  }
+
+
+const addNewUser = (newUser) => {
+  
+  axios.post(API_URL_DATA, newUser)
+  .then((res) => {
+    dispatch({type:"AddNewUser",
+              payload: newUser               
+             })
   })
+  .catch((err)=>{
+    console.log("error adding new user")
+  })
+  
+}
+
+  useEffect(()=>{
+    dispatch({type: "FetchAll"})
+    console.log("fetched all users")
     
   },[])
 
+  
+
+ 
   return (  
     
-    <UserContext.Provider value={{currentUser, setCurrentUser, registeredUsers, dispatch}}>      
+    <UserContext.Provider value={{currentUser, setCurrentUser, registeredUsers, dispatch, addNewUser, fetchUsers}}>      
         <Navbar />
         <Routes>
-          {registeredUsers.map((user)=><h1>{user.name}</h1>)
-          }
             <Route path="/" element={<Home />} />
           { currentUser.isLogged &&
             <Route path="/popular" element={<MovieList/>} />

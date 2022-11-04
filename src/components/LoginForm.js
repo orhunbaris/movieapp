@@ -4,7 +4,9 @@ import  {UserContext}  from "./UserContext.js"
 import  { API_URL_DATA}  from "../constants/Constants.js"
 
 
+
 import axios from "axios"
+
 
 
 
@@ -16,18 +18,19 @@ function LoginForm(){
     const [logged, setLogged] = useState(false)
     // State to store users
     const [user, setUser] = useState({name:"", password: ""})
+
     const [formAction, setFormAction] = useState("")
     // navigation
     const navigate = useNavigate()
     // Current User Context
-    const {currentUser, setCurrentUser, registeredUsers, dispatch} = useContext(UserContext)
+    const {currentUser, setCurrentUser, registeredUsers, dispatch, fetchUsers, addNewUser} = useContext(UserContext)
 
 
     
     
     // fetching the registered users from db.json
     useEffect(()=>{
-        //dispatch({type: 'GET'})
+        fetchUsers()
     },[])
 
 
@@ -36,7 +39,7 @@ function LoginForm(){
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        console.log(registeredUsers)
+        //console.log(registeredUsers)
 
 
         const isRegistered = registeredUsers.some(registeredUsers => registeredUsers.name === user.name && registeredUsers.password === user.password)
@@ -72,15 +75,16 @@ function LoginForm(){
                 
                 const userToAddId = Math.floor(Math.random() * (1000 - 5) + 5)
 
-                dispatch({
-                    type: "POST",
-                    payload: {
-                        id: userToAddId,
-                        name: user.name,
-                        password: user.password,
-                        favlist: []
-                    }
-                })
+                const newUser = {
+                    id: userToAddId,
+                    name: user.name,
+                    password: user.password,
+                    favlist: []
+                }
+                addNewUser(newUser)
+
+
+                
                
             }
                     
