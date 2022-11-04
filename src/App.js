@@ -34,7 +34,7 @@ function App() {
   const [registeredUsers, dispatch] = useReducer(registeredUsersReducer, initialUsers)  
 
 
-  const fetchUsers = () => {
+const fetchUsers = () => {
     axios.get(API_URL_DATA)
       .then((res)=>{
         dispatch({type: "FetchAll", payload: res.data})
@@ -42,7 +42,7 @@ function App() {
       .catch((err)=>{
         console.log("error fetching user data")
       })
-  }
+}
 
 
 const addNewUser = (newUser) => {
@@ -61,15 +61,34 @@ const addNewUser = (newUser) => {
 
   useEffect(()=>{
     fetchUsers()
+
+   
     
   },[])
 
-  
+
+const addFavoriteMovie = (currentUser, movieToAdd) => {
+   
+ 
+ 
+
+  axios.patch(`${API_URL_DATA}/${currentUser.id}`, 
+  {
+    favoritelist: [...currentUser.favoritelist, movieToAdd]
+  }
+  )
+  .then((res)=>{dispatch({
+    type: "UpdateFavoriteList",
+    payload: movieToAdd
+  })
+})
+
+}  
 
  
   return (  
     
-    <UserContext.Provider value={{currentUser, setCurrentUser, registeredUsers, dispatch, addNewUser, fetchUsers}}>      
+    <UserContext.Provider value={{currentUser, setCurrentUser, registeredUsers, dispatch, addNewUser, fetchUsers, addFavoriteMovie}}>      
         <Navbar />
         <Routes>
             <Route path="/" element={<Home />} />

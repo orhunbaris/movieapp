@@ -1,7 +1,7 @@
-import { useState, useEffect, useReducer, useContext } from "react"
-import { Link, useMatch, useResolvedPath, useNavigate } from "react-router-dom"
+import { useState, useEffect, useContext } from "react"
+import { useNavigate } from "react-router-dom"
 import  {UserContext}  from "./UserContext.js"
-import  { API_URL_DATA}  from "../constants/Constants.js"
+
 
 
 
@@ -55,9 +55,7 @@ function LoginForm(){
                         // If login process is successful update UserContext -> current_user and update isLogged which is passed by UserContext from parent component
                         setCurrentUser(
                             {
-                             currentUsername: user.name,
-                             isLogged: true, 
-                             currentId: matchedUser.id,
+                             matchedUser, isLogged: true
                             }
                         )
                         

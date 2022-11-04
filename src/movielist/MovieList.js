@@ -2,9 +2,6 @@ import { useEffect, useState, useContext} from "react"
 import MovieCard from "./MovieCard.js"
 import axios from "axios"
 import { UserContext } from "../components/UserContext.js"
-import MovieCardUpdate from "./MovieCardUpdate.js"
-import { Grid, ImageList } from "@mui/material"
-import { height } from "@mui/system"
 import Container from "@mui/material/Container"
 
 

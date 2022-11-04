@@ -1,5 +1,5 @@
 import { useContext, useState } from "react"
-import { Link } from "react-router-dom"
+
 import { UserContext } from "../components/UserContext"
 import axios from "axios"
 
@@ -9,7 +9,7 @@ function MovieCard({movie}){
 
     const [favoriteclick, setFavoriteClick] = useState(false)
 
-    const {currentuser} = useContext(UserContext)
+    const {currentuser, addFavoriteMovie} = useContext(UserContext)
     
     const movieToBeAdded = movie.title
 
@@ -18,7 +18,8 @@ function MovieCard({movie}){
         
         setFavoriteClick(!favoriteclick)
 
-        axios.patch()
+        addFavoriteMovie(movieToBeAdded)
+        
 
     }
 
