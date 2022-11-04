@@ -4,18 +4,21 @@ import { UserContext } from "../components/UserContext"
 import axios from "axios"
 
 
+
 function MovieCard({movie}){
 
     const [favoriteclick, setFavoriteClick] = useState(false)
 
     const {currentuser} = useContext(UserContext)
     
-    const movie_to_be_added = movie.title
+    const movieToBeAdded = movie.title
 
     
     const handleOnClick = () => {
         
         setFavoriteClick(!favoriteclick)
+
+        axios.patch()
 
     }
 

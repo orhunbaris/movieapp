@@ -1,12 +1,14 @@
 import { useState, useEffect, useReducer, useContext } from "react"
 import { Link, useMatch, useResolvedPath, useNavigate } from "react-router-dom"
 import  {UserContext}  from "./UserContext.js"
-import  {API_URL, API_URL_DATA}  from "../constants/Constants.js"
+import  { API_URL_DATA}  from "../constants/Constants.js"
+import registeredUsersReducer from "../reducers/registeredUsersReducer.js"
 
 import axios from "axios"
 
 
 
+const initialState = []
 
 function LoginForm(){
 
@@ -15,7 +17,7 @@ function LoginForm(){
     // State to store users
     const [user, setUser] = useState({name:"", password: ""})
     // State to store already registered users
-    const [registeredUsers, setRegisteredUsers] = useState([]) 
+    const [registeredUsers, dispatch] = useReducer(registeredUsers, initialState)
     // State to store if the user is trying to log in or register
     const [formAction, setFormAction] = useState("")
     // navigation
@@ -28,17 +30,7 @@ function LoginForm(){
     
     // fetching the registered users from db.json
     useEffect(()=>{
-        axios.get(API_URL).then((res)=>{
-    
-          setRegisteredUsers(res.data)
-          //console.log(registeredusers)
-          
-    
-        }).catch((err) => {
-    
-          console.log('error fetching')
-    
-        })
+        dispatch({type: 'GET'})
     },[])
 
 
@@ -47,15 +39,27 @@ function LoginForm(){
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        const isRegistered = registeredUsers.some(registeredusers => registeredUsers.name === user.name && registeredUsers.password === user.password)
+     
 
-        const matchedUser = registeredUsers.find(registeredusers => registeredUsers.name === user.name && registeredUsers.password === user.password)
+
+        const isRegistered = registeredUsers.some(registeredUsers => registeredUsers.name === user.name && registeredUsers.password === user.password)
+        
+
+
+
+        const matchedUser = registeredUsers.find(registeredUsers => registeredUsers.name === user.name && registeredUsers.password === user.password)
         
             if(formAction === "login"){
                     if(isRegistered)
                     {   
                         // If login process is successful update UserContext -> current_user and update isLogged which is passed by UserContext from parent component
-                        setCurrentUser({currentUsername: user.name, isLogged: true, currentId: matchedUser.id, currentPassword: matchedUser.password, currentList: matchedUser.favoritelist})
+                        setCurrentUser(
+                            {
+                             currentUsername: user.name,
+                             isLogged: true, 
+                             currentId: matchedUser.id,
+                            }
+                        )
                         
                         navigate("/popular")
                         
@@ -72,19 +76,13 @@ function LoginForm(){
                 // console.log("this user is trying to register")
 
                 // 
-                const user_to_add_id = Math.floor(Math.random() * (1000 - 5) + 5)
-
-
-                axios.post(API_URL_DATA ,{
-                    id: user_to_add_id,
+            dispatch({
+                type: "POST",
+                payload: {
                     name: user.name,
-                    password: user.password,
-                    favoritelist: []
-                } )
-                .then(res=> {console.log(res.data)})
-                .catch((err) => {
-                    console.log("error")
-                })
+                    password: user.password
+                }
+            })
                
             }
                     

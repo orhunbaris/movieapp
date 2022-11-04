@@ -29,6 +29,18 @@
       "name": "admin",
       "password": "123",
       "favoritelist": []
+    },
+    {
+      "id": 10,
+      "name": "didem",
+      "password": "123",
+      "favoritelist": []
+    },
+    {
+      "id": 369,
+      "name": "efe123",
+      "password": "12345",
+      "favoritelist": []
     }
   ]
 }

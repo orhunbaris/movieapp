@@ -8,13 +8,15 @@ import LoginForm from "./components/LoginForm.js";
 import Home from "./shared/Home.js";
 
 import { UserContext } from "./components/UserContext.js";
+import { API_URL_DATA } from "./constants/Constants.js";
+import registeredUsersReducer  from "./reducers/registeredUsersReducer.js";
 
 
 
 
 
+const initialState = [] 
 
- 
 
 
 function App() {
@@ -23,12 +25,13 @@ function App() {
     {
     currentId: null,
     currentUsername: "",
-    currentPassword: "",
-    currentList: [],
     isLogged: false
     }
   )
 
+  
+
+  const [registeredUsers, dispatch] = useReducer(registeredUsersReducer, initialState)
 
 
   return (  
@@ -37,7 +40,9 @@ function App() {
         <Navbar />
         <Routes>
             <Route path="/" element={<Home />} />
+          { currentUser.isLogged &&
             <Route path="/popular" element={<MovieList/>} />
+          }
             <Route path="/login" element={<LoginForm />} />
         </Routes>
     </UserContext.Provider>
