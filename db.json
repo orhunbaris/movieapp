@@ -4,7 +4,9 @@
       "id": "1",
       "name": "orhun",
       "password": "123",
-      "favoritelist": []
+      "favoritelist": [
+        "Thor: Love and Thunder"
+      ]
     },
     {
       "id": "2",
@@ -16,7 +18,9 @@
       "id": "3",
       "name": "efe",
       "password": "123",
-      "favoritelist": []
+      "favoritelist": [
+        "Terrifier 2"
+      ]
     },
     {
       "id": "4",
@@ -34,7 +38,9 @@
       "id": 10,
       "name": "didem",
       "password": "123",
-      "favoritelist": []
+      "favoritelist": [
+        "Black Adam"
+      ]
     },
     {
       "id": 369,

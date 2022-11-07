@@ -9,7 +9,7 @@ function MovieCard({movie}){
 
     const [favoriteclick, setFavoriteClick] = useState(false)
 
-    const {currentuser, addFavoriteMovie} = useContext(UserContext)
+    const {currentUser, addFavoriteMovie, removeFavoriteMovie} = useContext(UserContext)
     
     const movieToBeAdded = movie.title
 
@@ -18,7 +18,18 @@ function MovieCard({movie}){
         
         setFavoriteClick(!favoriteclick)
 
-        addFavoriteMovie(movieToBeAdded)
+
+        if(!favoriteclick)
+        {
+            addFavoriteMovie(movieToBeAdded)
+            console.log("adding")
+        }
+        else
+        {
+            removeFavoriteMovie(movieToBeAdded)
+            console.log("removing")
+        }
+        
         
 
     }

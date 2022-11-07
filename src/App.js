@@ -67,10 +67,7 @@ const addNewUser = (newUser) => {
   },[])
 
 
-const addFavoriteMovie = (currentUser, movieToAdd) => {
-   
- 
- 
+const addFavoriteMovie = (movieToAdd) => {
 
   axios.patch(`${API_URL_DATA}/${currentUser.id}`, 
   {
@@ -79,16 +76,41 @@ const addFavoriteMovie = (currentUser, movieToAdd) => {
   )
   .then((res)=>{dispatch({
     type: "UpdateFavoriteList",
-    payload: movieToAdd
+    payload: movieToAdd, 
+    id: currentUser.id
+    
   })
 })
 
 }  
 
+
+const removeFavoriteMovie = (movieToRemove) => {
+
+  const cloneList = currentUser.favoritelist
+  const filteredList = cloneList.filter((element)=> element !== movieToRemove)
+
+  
+
+  axios.patch(`${API_URL_DATA}/${currentUser.id}`, 
+  {
+    favoritelist: filteredList
+  }
+  )
+  .then((res)=>{dispatch({
+    type: "DeleteFromFavoriteList",
+    id: currentUser.id,
+    filteredList: filteredList
+
+  })
+})
+
+}
+
  
   return (  
     
-    <UserContext.Provider value={{currentUser, setCurrentUser, registeredUsers, dispatch, addNewUser, fetchUsers, addFavoriteMovie}}>      
+    <UserContext.Provider value={{currentUser, setCurrentUser, registeredUsers, dispatch, addNewUser, fetchUsers, addFavoriteMovie, removeFavoriteMovie}}>      
         <Navbar />
         <Routes>
             <Route path="/" element={<Home />} />

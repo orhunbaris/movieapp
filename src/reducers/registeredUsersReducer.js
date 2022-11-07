@@ -20,17 +20,25 @@ export default function  registeredUsersReducer(registeredUsers, action){
             {
                 let movieToAdd = action.payload.movieToAdd
 
-                let currentUserId = action.payload.id
+                let currentUserId = action.id
 
-                let i = registeredUsers.indexOf(element=>element.id === currentUserId)
+                let i = registeredUsers.findIndex(element=>element.id === currentUserId)
 
                 registeredUsers[i].favoritelist = [...registeredUsers[i].favoritelist, movieToAdd ]
-                console.log(registeredUsers)
-                break;
+                
+                return registeredUsers;
             }
-        case "DELETEUSER":
+        case "DeleteFromFavoriteList":
             {
-                break
+               
+
+                let currentUserId = action.id
+
+                let i = registeredUsers.findIndex(element=>element.id === currentUserId)
+                console.log(i)
+                registeredUsers[i].favoritelist = action.filteredList
+
+                return registeredUsers;
             }
         default:
             throw Error("unknown action...")

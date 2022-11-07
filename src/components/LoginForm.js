@@ -55,7 +55,7 @@ function LoginForm(){
                         // If login process is successful update UserContext -> current_user and update isLogged which is passed by UserContext from parent component
                         setCurrentUser(
                             {
-                             matchedUser, isLogged: true
+                             ...matchedUser, isLogged: true
                             }
                         )
                         
