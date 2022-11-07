@@ -32,6 +32,8 @@
 
 .env.production.local
 
+.env.secret
+
 /.idea
 
 

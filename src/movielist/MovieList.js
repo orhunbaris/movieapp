@@ -12,16 +12,11 @@ const apiKey = process.env.REACT_APP_API_KEY
 
 
 
-function MovieList ({}){
+function MovieList (){
 
     const [movies, setMovies] = useState([])
 
     const {currentUser} = useContext(UserContext)
-
-    
-  
-  
-    
 
     useEffect(()=>{
         // with each user, rerun the fetch
