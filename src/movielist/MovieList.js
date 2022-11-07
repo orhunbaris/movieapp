@@ -18,6 +18,8 @@ function MovieList (){
 
     const {currentUser} = useContext(UserContext)
 
+    //console.log(currentUser)
+
     useEffect(()=>{
         // with each user, rerun the fetch
         axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`).then((res)=>{

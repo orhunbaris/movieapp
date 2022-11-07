@@ -1,15 +1,25 @@
 import { useContext } from "react"
+import { useNavigate } from "react-router-dom"
 import { UserContext } from "../components/UserContext"
+
 
 
 
 
 function LogOutButton(){
 
-    const {currentUser, setCurrentUser} = useContext(UserContext)
+    const { setCurrentUser} = useContext(UserContext)
+
+    const navigate = useNavigate()
+
+
 
     const handleOnClick = () => {
     // TO DO: set Current User to null and isLogged = false
+    setCurrentUser({
+        isLogged: false
+    })
+    navigate("/login")
 
     }
 
@@ -17,7 +27,7 @@ function LogOutButton(){
 
     return(
         <>
-            <button onClick={hande}>Log Out</button>
+            <button onClick={handleOnClick}>Log Out</button>
         </>
     )
 

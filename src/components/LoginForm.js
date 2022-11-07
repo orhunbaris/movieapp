@@ -4,6 +4,8 @@ import  {UserContext}  from "./UserContext.js"
 import { formActionType } from "../constants/Constants.js"
 
 function LoginForm(){
+
+   
    
     // State to store users
     const [user, setUser] = useState({name:"", password: ""})
@@ -19,6 +21,8 @@ function LoginForm(){
     useEffect(()=>{
         //fetchUsers()
     },[])
+
+    //console.log(currentUser)
 
     const handleSubmit = (e) => {
         e.preventDefault()
