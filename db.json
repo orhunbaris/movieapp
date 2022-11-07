@@ -4,9 +4,7 @@
       "id": "1",
       "name": "orhun",
       "password": "123",
-      "favoritelist": [
-        "Thor: Love and Thunder"
-      ]
+      "favoritelist": []
     },
     {
       "id": "2",
@@ -18,9 +16,7 @@
       "id": "3",
       "name": "efe",
       "password": "123",
-      "favoritelist": [
-        "Terrifier 2"
-      ]
+      "favoritelist": 7
     },
     {
       "id": "4",
@@ -39,7 +35,11 @@
       "name": "didem",
       "password": "123",
       "favoritelist": [
-        "Black Adam"
+        "Terrifier 2",
+        "Coco",
+        "Black Adam",
+        "MexZombies",
+        "Fullmetal Alchemist: The Final Alchemy"
       ]
     },
     {

@@ -1,7 +1,7 @@
 import { useContext, useState } from "react"
 
 import { UserContext } from "../components/UserContext"
-import axios from "axios"
+
 
 
 
@@ -11,7 +11,7 @@ function MovieCard({movie}){
 
     const {currentUser, addFavoriteMovie, removeFavoriteMovie} = useContext(UserContext)
     
-    const movieToBeAdded = movie.title
+    
 
     
     const handleOnClick = () => {
@@ -21,12 +21,12 @@ function MovieCard({movie}){
 
         if(!favoriteclick)
         {
-            addFavoriteMovie(movieToBeAdded)
+            addFavoriteMovie(movie.title)
             console.log("adding")
         }
         else
         {
-            removeFavoriteMovie(movieToBeAdded)
+            removeFavoriteMovie(movie.title)
             console.log("removing")
         }
         
@@ -43,10 +43,10 @@ function MovieCard({movie}){
             <p className="movie-card-overview">{movie.overview}</p> */}
             <img src={"https://image.tmdb.org/t/p/w500" + movie.poster_path} alt="movie_card_image" className="movie-card-image"/>
             {
-                favoriteclick ?
-                <img src="https://img.icons8.com/ios-filled/50/000000/christmas-star.png" onClick={handleOnClick}/>
+                currentUser.favoritelist.includes(movie.title) ?
+                <img src="https://img.icons8.com/ios-filled/50/000000/christmas-star.png" onClick={handleOnClick} alt="star-filled"/>
                 :
-                <img src="https://img.icons8.com/ios/50/000000/christmas-star.png"onClick={handleOnClick}/>
+                <img src="https://img.icons8.com/ios/50/000000/christmas-star.png"onClick={handleOnClick} alt="star-empty"/>
             } 
         </div>
     )

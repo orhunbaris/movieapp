@@ -34,78 +34,82 @@ function App() {
   const [registeredUsers, dispatch] = useReducer(registeredUsersReducer, initialUsers)  
 
 
-const fetchUsers = () => {
-    axios.get(API_URL_DATA)
-      .then((res)=>{
-        dispatch({type: "FetchAll", payload: res.data})
-      })
-      .catch((err)=>{
-        console.log("error fetching user data")
-      })
-}
+  const fetchUsers = () => {
+      axios.get(API_URL_DATA)
+        .then((res)=>{
+          dispatch({type: "FetchAll", payload: res.data})
+        })
+        .catch((err)=>{
+          console.log("error fetching user data")
+        })
+  }
 
 
-const addNewUser = (newUser) => {
-  
-  axios.post(API_URL_DATA, newUser)
-  .then((res) => {
-    dispatch({type:"AddNewUser",
-              payload: newUser               
-             })
-  })
-  .catch((err)=>{
-    console.log("error adding new user")
-  })
-  
-}
+  const addNewUser = (newUser) => {
+    
+    axios.post(API_URL_DATA, newUser)
+    .then((res) => {
+      dispatch({type:"AddNewUser",
+                payload: newUser               
+              })
+    })
+    .catch((err)=>{
+      console.log("error adding new user")
+    })
+    
+  }
 
   useEffect(()=>{
     fetchUsers()
 
-   
-    
   },[])
 
 
-const addFavoriteMovie = (movieToAdd) => {
+  const addFavoriteMovie = (movieToAdd) => {
 
-  axios.patch(`${API_URL_DATA}/${currentUser.id}`, 
-  {
-    favoritelist: [...currentUser.favoritelist, movieToAdd]
+      if(!currentUser.favoritelist.includes(movieToAdd)){
+
+        currentUser.favoritelist.push(movieToAdd)
+
+        axios.patch(`${API_URL_DATA}/${currentUser.id}`,{
+          favoritelist: currentUser.favoritelist
+        })
+        .then((res)=>{dispatch({
+          type: "UpdateFavoriteList",
+          movieToAdd: movieToAdd, 
+          id: currentUser.id,
+          
+          
+        })
+      })
+    }
+    else {
+
+      console.log("This movie already exists in" + currentUser.name + "'s Favorite List")
+    }
+
+
+  }  
+
+
+  const removeFavoriteMovie = (movieToRemove) => {
+
+      // removing the movie from currentUser
+      currentUser.favoritelist = currentUser.favoritelist.filter((element)=> element !== movieToRemove)
+
+      // updating the favorite list in db
+      axios.patch(`${API_URL_DATA}/${currentUser.id}`,{
+        favoritelist: currentUser.favoritelist
+      })
+      .then((res)=>{dispatch({
+        type: "DeleteFromFavoriteList",
+        id: currentUser.id,
+        updatedList: currentUser.favoritelist
+
+      })
+    })
+
   }
-  )
-  .then((res)=>{dispatch({
-    type: "UpdateFavoriteList",
-    payload: movieToAdd, 
-    id: currentUser.id
-    
-  })
-})
-
-}  
-
-
-const removeFavoriteMovie = (movieToRemove) => {
-
-  const cloneList = currentUser.favoritelist
-  const filteredList = cloneList.filter((element)=> element !== movieToRemove)
-
-  
-
-  axios.patch(`${API_URL_DATA}/${currentUser.id}`, 
-  {
-    favoritelist: filteredList
-  }
-  )
-  .then((res)=>{dispatch({
-    type: "DeleteFromFavoriteList",
-    id: currentUser.id,
-    filteredList: filteredList
-
-  })
-})
-
-}
 
  
   return (  

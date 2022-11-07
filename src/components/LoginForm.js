@@ -1,21 +1,10 @@
 import { useState, useEffect, useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import  {UserContext}  from "./UserContext.js"
-
-
-
-
-import axios from "axios"
-
-
-
-
-
+import { formActionType } from "../constants/Constants.js"
 
 function LoginForm(){
-
-    // Boolean state to check if the user is logged in or not
-    const [logged, setLogged] = useState(false)
+   
     // State to store users
     const [user, setUser] = useState({name:"", password: ""})
 
@@ -23,33 +12,22 @@ function LoginForm(){
     // navigation
     const navigate = useNavigate()
     // Current User Context
-    const {currentUser, setCurrentUser, registeredUsers, dispatch, fetchUsers, addNewUser} = useContext(UserContext)
+    const { setCurrentUser, registeredUsers, addNewUser } = useContext(UserContext)
 
-
-    
     
     // fetching the registered users from db.json
     useEffect(()=>{
         //fetchUsers()
     },[])
 
-
-    
-
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        //console.log(registeredUsers)
-
-
         const isRegistered = registeredUsers.some(registeredUsers => registeredUsers.name === user.name && registeredUsers.password === user.password)
-        
-
-
-
+       
         const matchedUser = registeredUsers.find(registeredUsers => registeredUsers.name === user.name && registeredUsers.password === user.password)
         
-            if(formAction === "login"){
+            if(formAction === formActionType.LOGIN){
                     if(isRegistered)
                     {   
                         // If login process is successful update UserContext -> current_user and update isLogged which is passed by UserContext from parent component
@@ -58,18 +36,13 @@ function LoginForm(){
                              ...matchedUser, isLogged: true
                             }
                         )
-                        
                         navigate("/popular")
-                        
-
                     }
                     else{
-
-                        
-                        alert("cannot log in...")
+                    alert("cannot log in...")
                     }
                 }
-            else if(formAction ==="register"){
+            else if(formAction === formActionType.REGISTER){
                 
                 const userToAddId = Math.floor(Math.random() * (1000 - 5) + 5)
 
@@ -80,14 +53,9 @@ function LoginForm(){
                     favlist: []
                 }
                 addNewUser(newUser)
-
-
-                
-               
+   
             }
-                    
-        
-            
+           
     }
     
     
