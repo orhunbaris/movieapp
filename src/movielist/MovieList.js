@@ -8,6 +8,7 @@ import Container from "@mui/material/Container"
 
 
 const apiKey = process.env.REACT_APP_API_KEY
+let initialPageNumber = 1
 
 
 
@@ -18,11 +19,32 @@ function MovieList (){
 
     const {currentUser} = useContext(UserContext)
 
-    //console.log(currentUser)
+    
+    
+    window.onscroll = function(){
+     if(window.innerHeight + window.pageYOffset >= document.body.offsetHeight){
+      // Get the next 20 of the popular movies
+      
+      //console.log("At the bottom, now getting the next page of movies")
+      axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${initialPageNumber+1}`).then((res)=>{
+    
+          setMovies([...movies, ...res.data.results])
+    
+        }).catch((err) => {
+    
+          console.log('error')
+    
+        })
+      initialPageNumber = initialPageNumber + 1
+     }
+    }
+
+   //console.log(movies)
+
 
     useEffect(()=>{
         // with each user, rerun the fetch
-        axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`).then((res)=>{
+        axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${initialPageNumber}`).then((res)=>{
     
           setMovies(res.data.results)
     

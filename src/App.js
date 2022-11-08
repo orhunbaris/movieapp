@@ -78,8 +78,7 @@ function App() {
           type: "UpdateFavoriteList",
           movieToAdd: movieToAdd, 
           id: currentUser.id,
-          
-          
+         
         })
       })
     }
