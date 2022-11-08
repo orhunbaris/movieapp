@@ -26,7 +26,7 @@ function App() {
     {
     currentId: null,
     currentUsername: "",
-    isLogged: false
+    isLoggedIn: false
     }
   )
 
@@ -58,6 +58,9 @@ function App() {
     })
     
   }
+
+  
+
 
   useEffect(()=>{
     fetchUsers()
@@ -117,7 +120,7 @@ function App() {
         <Navbar />
         <Routes>
             <Route path="/" element={<Home />} />
-          { currentUser.isLogged &&
+          { currentUser.isLoggedIn &&
             <Route path="/popular" element={<MovieList/>} />
           }
             <Route path="/login" element={<LoginForm />} />

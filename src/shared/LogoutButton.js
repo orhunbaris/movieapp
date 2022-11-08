@@ -15,9 +15,9 @@ function LogOutButton(){
 
 
     const handleOnClick = () => {
-    // TO DO: set Current User to null and isLogged = false
+    // TO DO: set Current User to null and isLoggedIn = false
     setCurrentUser({
-        isLogged: false
+        isLoggedIn: false
     })
     navigate("/login")
 

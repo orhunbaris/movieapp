@@ -8,6 +8,9 @@ import Container from "@mui/material/Container"
 
 
 const apiKey = process.env.REACT_APP_API_KEY
+
+const movieDataBaseUrl = process.env.REACT_APP_MOVIE_API_URL
+
 let initialPageNumber = 1
 
 
@@ -19,6 +22,9 @@ function MovieList (){
 
     const {currentUser} = useContext(UserContext)
 
+
+    // var currentUserName = localStorage.getItem('currentUser')
+    //console.log(currentUserName)
     
     
     window.onscroll = function(){
@@ -26,7 +32,7 @@ function MovieList (){
       // Get the next 20 of the popular movies
       
       //console.log("At the bottom, now getting the next page of movies")
-      axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${initialPageNumber+1}`).then((res)=>{
+      axios.get(movieDataBaseUrl+`${apiKey}&language=en-US&page=${initialPageNumber}`).then((res)=>{
     
           setMovies([...movies, ...res.data.results])
     
@@ -44,7 +50,9 @@ function MovieList (){
 
     useEffect(()=>{
         // with each user, rerun the fetch
-        axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${initialPageNumber}`).then((res)=>{
+
+        //console.log(movieDataBaseUrl)
+        axios.get(movieDataBaseUrl+`${apiKey}&language=en-US&page=${initialPageNumber}`).then((res)=>{
     
           setMovies(res.data.results)
     
@@ -57,8 +65,7 @@ function MovieList (){
       },[])
 
 
-        if(currentUser.isLogged === true)
-        {
+        
             return(
                 <Container className="movie-list" sx={{}} >
                     
@@ -73,11 +80,8 @@ function MovieList (){
                         }
                 </Container>
             )
-        }
-        else{
-            
-            return <h1>Please log in before you continue</h1>
-        }
+        
+        
    
 
 }

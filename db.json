@@ -4,7 +4,14 @@
       "id": "1",
       "name": "orhun",
       "password": "123",
-      "favoritelist": []
+      "favoritelist": [
+        "Terrifier 2",
+        "Blade of the 47 Ronin",
+        "Terrifier",
+        "MexZombies",
+        "The Battle at Lake Changjin: Water Gate Bridge",
+        "Fall"
+      ]
     },
     {
       "id": "2",
@@ -16,7 +23,14 @@
       "id": "3",
       "name": "efe",
       "password": "123",
-      "favoritelist": []
+      "favoritelist": [
+        "Terrifier 2",
+        "Black Adam",
+        "Piggy",
+        "Jeepers Creepers: Reborn",
+        "Terrifier",
+        "Fullmetal Alchemist: The Final Alchemy"
+      ]
     },
     {
       "id": "4",
