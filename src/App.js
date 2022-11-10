@@ -1,6 +1,6 @@
 import { useState, useEffect, useReducer } from "react";
 import axios from "axios";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 
 import MovieList from "./movielist/MovieList.js";
 import Navbar from "./shared/Navbar.js";
@@ -10,6 +10,7 @@ import Home from "./shared/Home.js";
 import { UserContext } from "./components/UserContext.js";
 import { API_URL_DATA } from "./constants/Constants.js";
 import registeredUsersReducer from "./reducers/registeredUsersReducer.js";
+
 
 const initialUsers = [];
 
@@ -109,9 +110,15 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        {currentUser.isLoggedIn && (
-          <Route path="/popular" element={<MovieList />} />
-        )}
+        
+          
+          <Route path="/popular" element={
+            currentUser.isLoggedIn 
+            ? <MovieList /> 
+            : <Navigate to="/login"/>
+            } />
+            
+        
         <Route path="/login" element={<LoginForm />} />
       </Routes>
     </UserContext.Provider>

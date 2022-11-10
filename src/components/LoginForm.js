@@ -68,7 +68,7 @@ function LoginForm() {
 
       <form className="login-form text-center m-2 p-12" onSubmit={handleSubmit}>
         <div className="inner-form-element">
-          <label className="label-name px-2">Name</label>
+          <label className="label-name px-5 border-2 rounded-md ">Name</label>
           <input
             type="text"
             id="name"
@@ -78,13 +78,13 @@ function LoginForm() {
           ></input>
         </div>
         <div className="inner-form-element py-2">
-          <label className="label-password px-2">Password</label>
+          <label className="label-password px-2 border-2 rounded-md ">Password</label>
           <input
             type="password"
             id="password"
             placeholder=" Password"
             onChange={(e) => setUser({ ...user, password: e.target.value })}
-            className=""
+            className="rounded"
           ></input>
         </div>
         <button
