@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "./UserContext.js";
 import { formActionType } from "../constants/Constants.js";
+import { Container } from "@mui/material";
 
 function LoginForm() {
   // State to store users
@@ -62,31 +63,33 @@ function LoginForm() {
   };
 
   return (
-    <div>
-      <h1>Welcome!</h1>
+    <div className="container mx-auto">
+      <h1 className="text-center hover:text-slate-500">Welcome!</h1>
 
-      <form className="login-form" onSubmit={handleSubmit}>
+      <form className="login-form text-center m-2 p-12" onSubmit={handleSubmit}>
         <div className="inner-form-element">
-          <label className="label-name">Name</label>
+          <label className="label-name px-2">Name</label>
           <input
             type="text"
             id="name"
-            placeholder="Your Name"
+            className="rounded"
+            placeholder=" Your Name"
             onChange={(e) => setUser({ ...user, name: e.target.value })}
           ></input>
         </div>
-        <div className="inner-form-element">
-          <label className="label-password">Password</label>
+        <div className="inner-form-element py-2">
+          <label className="label-password px-2">Password</label>
           <input
             type="password"
             id="password"
-            placeholder="Password"
+            placeholder=" Password"
             onChange={(e) => setUser({ ...user, password: e.target.value })}
+            className=""
           ></input>
         </div>
         <button
           type="submit"
-          className="submit-button"
+          className="submit-button px-3 bg-slate-300 rounded hover:bg-slate-200 mx-2"
           value="login"
           onClick={() => setFormAction("login")}
         >
@@ -94,7 +97,7 @@ function LoginForm() {
         </button>
         <button
           type="submit"
-          className="submit-button"
+          className="submit-button px-3 bg-slate-300 rounded hover:bg-slate-200 mx-2"
           value="register"
           onClick={() => setFormAction("register")}
         >

@@ -57,11 +57,11 @@ function MovieList() {
   }, []);
 
   return (
-    <Container className="movie-list" sx={{}}>
+    <div className="grid grid-cols-2 gap-10">
       {movies.map((movie, index) => {
         return <MovieCard key={index} movie={movie} />;
       })}
-    </Container>
+    </div>
   );
 }
 
