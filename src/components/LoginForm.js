@@ -68,8 +68,8 @@ function LoginForm() {
         <h1 className="text-center text-3xl text-lime-300">Welcome!</h1>
           <div className="w-auto bg-white   rounded-lg shadow dark:border md:mt-0 sm:max-wmd xl:p-0 dark:bg-neutral-800 opacity-90 dark:border-gray-300">
               <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                      <form className="login-form space-y-2  m-2 p-5 " onSubmit={handleSubmit}>
-                        <div className="inner-form-element py-5">
+                      <form className="login-form space-y-2  m-0 p-2 " onSubmit={handleSubmit}>
+                        <div className="inner-form-element py-5 ">
                           <label className="label-name block rounded-md text-lg text-white">Name</label>
                           <input
                             type="text"
@@ -89,6 +89,7 @@ function LoginForm() {
                             className="rounded"
                           ></input>
                         </div>
+                        <div className="flex flex-col gap-7">
                         <button
                           type="submit"
                           className="submit-button px-3 bg-lime-300 rounded hover:bg-lime-500 mx-2"
@@ -99,12 +100,13 @@ function LoginForm() {
                         </button>
                         <button
                           type="submit"
-                          className="submit-button px-3 bg-lime-300 rounded hover:bg-lime-500 mx-2"
+                          className="submit-button px-3 bg-lime-300 rounded hover:bg-lime-500 mx-5"
                           value="register"
                           onClick={() => setFormAction("register")}
                         >
                           Register
                         </button>
+                        </div>
                       </form>
           </div>                        
         </div>

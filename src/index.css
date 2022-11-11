@@ -19,9 +19,9 @@ body {
   background-color: #333;
   color: rgb(190 242 100);
   display: flex;
-  justify-content: space-between;
+  justify-content:inherit;
   align-items: center;
-  gap: 2rem;
+  gap: 90em;
   padding: 0 1rem;
 }
 
@@ -40,6 +40,6 @@ body {
 }
 
 .movie-list {
-  background: #6a6a6d;
+  background: #575759;
 }
 

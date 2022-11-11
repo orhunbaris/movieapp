@@ -7,4 +7,3 @@ export const formActionType = {
     LOGIN: "login",
     REGISTER: "register"
 }
-

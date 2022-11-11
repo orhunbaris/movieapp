@@ -8,7 +8,7 @@ export default function Navbar()
     return(
         <nav className="nav opacity-85">
             <Link to="/" className="site-title">Movie App</Link>
-            <ul>
+            <ul className="flex flex-row-reverse gap-40 text-lg justify-center">
                 <CustomLink to="/popular"> Popular </CustomLink>
                 <CustomLink to="/login"> Log in </CustomLink>
                 {/* {

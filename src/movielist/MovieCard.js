@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import MovieCardModal from "./MovieCardModal";
 
 import { UserContext } from "../components/UserContext";
 
@@ -6,7 +7,9 @@ function MovieCard({ movie }) {
   const [favoriteclick, setFavoriteClick] = useState(false);
 
   const { currentUser, addFavoriteMovie, removeFavoriteMovie } =
-    useContext(UserContext);
+  useContext(UserContext);
+
+  const [modalToggle, setModalToggle] = useState(false)
 
   const handleOnClick = () => {
     setFavoriteClick(!favoriteclick);
@@ -19,19 +22,20 @@ function MovieCard({ movie }) {
     }
   };
 
-  return (
-    <div key={movie.id} className="movie-card max-w-sm rounded overflow-hidden shadow-lg text-lg">
+  const learnMoreClicked = () => {
+    setModalToggle(!modalToggle)
+    
+  }
 
-      <h1 className="movie-card-title text-center text-white">{movie.title}</h1>  
+  return (
+    <div key={movie.id} className="movie-card max-w-sm rounded overflow-hidden shadow-lg text-lg text-center">
+
+      <h1 className="movie-card-title text-center text-xl text-white">{movie.title}</h1>  
       <img
         src={"https://image.tmdb.org/t/p/w500" + movie.poster_path}
         alt="movie_card_image"
         className="movie-card-image w-full"
       />
-      
-      
-
-
 
       {currentUser.favoritelist.includes(movie.title) 
       ? (
@@ -51,6 +55,14 @@ function MovieCard({ movie }) {
           Add to Watch List
         </div>
       )}
+      {/* <button className="text-white cursor-pointer text-xl" onClick={learnMoreClicked}>
+        Learn more
+      </button>
+      {
+        modalToggle && <MovieCardModal movie={movie}/>
+      } */}
+      
+      
     </div>
   );
 }
