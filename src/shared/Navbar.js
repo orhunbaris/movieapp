@@ -6,7 +6,7 @@ export default function Navbar()
     
 
     return(
-        <nav className="nav">
+        <nav className="nav opacity-85">
             <Link to="/" className="site-title">Movie App</Link>
             <ul>
                 <CustomLink to="/popular"> Popular </CustomLink>

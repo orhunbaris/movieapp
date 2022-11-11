@@ -57,7 +57,7 @@ function MovieList() {
   }, []);
 
   return (
-    <div className="grid grid-cols-5 gap-5">
+    <div className="movie-list grid grid-cols-5 gap-5">
       {movies.map((movie, index) => {
         return <MovieCard key={index} movie={movie} />;
       })}

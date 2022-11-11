@@ -66,46 +66,46 @@ function LoginForm() {
     <section className="login-container mx-auto p-12">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto">
         <h1 className="text-center text-3xl text-lime-300">Welcome!</h1>
-          <div className="w-auto bg-white rounded-lg shadow dark:border md:mt-0 sm:max-wmd xl:p-0 dark:bg-gray-600 dark:border-gray-300">
+          <div className="w-auto bg-white   rounded-lg shadow dark:border md:mt-0 sm:max-wmd xl:p-0 dark:bg-neutral-800 opacity-90 dark:border-gray-300">
               <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                                  <form className="login-form text-center m-2 p-10 h-screen" onSubmit={handleSubmit}>
-                                    <div className="inner-form-element py-5">
-                                      <label className="label-name px-5 border-2 rounded-md text-white">Name</label>
-                                      <input
-                                        type="text"
-                                        id="name"
-                                        className="rounded"
-                                        placeholder=" Your Name"
-                                        onChange={(e) => setUser({ ...user, name: e.target.value })}
-                                      ></input>
-                                    </div>
-                                    <div className="inner-form-element py-5">
-                                      <label className="label-password px-2 border-2 rounded-md text-white">Password</label>
-                                      <input
-                                        type="password"
-                                        id="password"
-                                        placeholder=" Password"
-                                        onChange={(e) => setUser({ ...user, password: e.target.value })}
-                                        className="rounded"
-                                      ></input>
-                                    </div>
-                                    <button
-                                      type="submit"
-                                      className="submit-button px-3 bg-lime-300 rounded hover:bg-lime-500 mx-2"
-                                      value="login"
-                                      onClick={() => setFormAction("login")}
-                                    >
-                                      Login
-                                    </button>
-                                    <button
-                                      type="submit"
-                                      className="submit-button px-3 bg-lime-300 rounded hover:bg-lime-500 mx-2"
-                                      value="register"
-                                      onClick={() => setFormAction("register")}
-                                    >
-                                      Register
-                                    </button>
-                                  </form>
+                      <form className="login-form space-y-2  m-2 p-5 " onSubmit={handleSubmit}>
+                        <div className="inner-form-element py-5">
+                          <label className="label-name block rounded-md text-lg text-white">Name</label>
+                          <input
+                            type="text"
+                            id="name"
+                            className="rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full"
+                            placeholder=" Your Name"
+                            onChange={(e) => setUser({ ...user, name: e.target.value })}
+                          ></input>
+                        </div>
+                        <div className="inner-form-element py-5">
+                          <label className="label-password block rounded-md text-lg text-white">Password</label>
+                          <input
+                            type="password"
+                            id="password"
+                            placeholder=" Password"
+                            onChange={(e) => setUser({ ...user, password: e.target.value })}
+                            className="rounded"
+                          ></input>
+                        </div>
+                        <button
+                          type="submit"
+                          className="submit-button px-3 bg-lime-300 rounded hover:bg-lime-500 mx-2"
+                          value="login"
+                          onClick={() => setFormAction("login")}
+                        >
+                          Login
+                        </button>
+                        <button
+                          type="submit"
+                          className="submit-button px-3 bg-lime-300 rounded hover:bg-lime-500 mx-2"
+                          value="register"
+                          onClick={() => setFormAction("register")}
+                        >
+                          Register
+                        </button>
+                      </form>
           </div>                        
         </div>
       </div>
