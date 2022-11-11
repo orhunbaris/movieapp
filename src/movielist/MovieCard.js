@@ -22,25 +22,34 @@ function MovieCard({ movie }) {
   return (
     <div key={movie.id} className="movie-card max-w-sm rounded overflow-hidden shadow-lg text-lg">
 
-      <h1 className="movie-card-title text-center">{movie.title}</h1>
+      
       <img
         src={"https://image.tmdb.org/t/p/w500" + movie.poster_path}
         alt="movie_card_image"
         className="movie-card-image w-full"
       />
+      <h1 className="movie-card-title text-center text-white">{movie.title}</h1>
       
-      {currentUser.favoritelist.includes(movie.title) ? (
-        <img
-          src="/assets/blue_star_filled.png"
+
+
+
+      {currentUser.favoritelist.includes(movie.title) 
+      ? (
+        <div
+          className="text-center text-lime-500 cursor-pointer"
           onClick={handleOnClick}
-          alt="star-filled"
-        />
-      ) : (
-        <img
-          src="/assets/blue_star_empty.png"
+          alt="favorite-clicked"
+        >
+          Add to Watch List
+        </div>) 
+      : (
+        <div 
+          className="text-center text-lime-200 cursor-pointer"
           onClick={handleOnClick}
-          alt="star-empty"
-        />
+          alt="favorite-clicked"
+        >
+          Add to Watch List
+        </div>
       )}
     </div>
   );

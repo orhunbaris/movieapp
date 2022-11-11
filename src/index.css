@@ -8,7 +8,8 @@
 
 body {
     margin: 0;
-    background: #edeef6;
+    background: #6a6a6d;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .nav {
@@ -40,5 +41,9 @@ body {
 .movie-list {
    columns: 2;
    
+}
+
+.login-container {
+    background: #6a6a6d;
 }
 
